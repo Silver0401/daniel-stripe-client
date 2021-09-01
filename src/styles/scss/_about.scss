@@ -1,0 +1,10 @@
+.AboutPage {
+  position: absolute;
+  width: 100%;
+  top: 70px;
+  height: calc(100% - 70px);
+  z-index: 1;
+  @include alignCenter;
+
+  background-color: var(--SiteTertiaryColor);
+}
