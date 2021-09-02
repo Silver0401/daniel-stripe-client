@@ -1,3 +1,3 @@
-# Daniel Salas Personal Web Portafolio
+# Daniel Sanchez External Stripe Payment Tool
 
-Portafolio designed and developed by Ismael M.C. throught smortMC2 tech company
+Designed and developed by Ismael M.C. throught smortMC2 tech company

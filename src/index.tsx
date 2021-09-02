@@ -6,13 +6,21 @@ import "./styles/css/index.css";
 import { BrowserRouter } from "react-router-dom";
 import { ContextProvider } from "./data/context";
 import { ChakraProvider } from "@chakra-ui/react";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+
+const stripePromise = loadStripe(
+  "pk_test_51I2XfOBwVvvXbSw3t1tAdKjpsto1DYeBkb71GrTineG3wCf2Uf0yq54TGCJGMtKvxN5HPlCAFm0qV68zrhaKDbh800LCB6fOU7"
+);
 
 ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider>
       <BrowserRouter>
         <ContextProvider>
-          <App />
+          <Elements stripe={stripePromise}>
+            <App />
+          </Elements>
         </ContextProvider>
       </BrowserRouter>
     </ChakraProvider>

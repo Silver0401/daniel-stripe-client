@@ -7,27 +7,8 @@ const NavBar: React.FC = () => {
   const { contextData } = useContext(Context);
 
   return (
-    <nav
-      className="GlobalNav"
-      style={
-        contextData.currentPage === "Home"
-          ? {
-              backgroundColor: "transparent",
-              transition: "background-color 250ms",
-            }
-          : contextData.currentPage === "Contact"
-          ? { backgroundColor: "#1b1b1d", transition: "background-color 250ms" }
-          : contextData.currentPage === "About"
-          ? { backgroundColor: "#8d8d8e", transition: "background-color 250ms" }
-          : {
-              backgroundColor: "transparent",
-              transition: "background-color 250ms",
-            }
-      }
-    >
-      <div className="logo">
-        <img src={logo} alt="DSlogo" />
-      </div>
+    <nav className="GlobalNav">
+      <div className="logo"></div>
       <ul>
         <Link className="Home" to="/">
           <svg

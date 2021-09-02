@@ -1,12 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
 
 @import "./functions";
-@import "./about";
-@import "./contact";
 
 :root {
-  --SitePrimaryColor: #1b1b1d;
-  --SiteSecondaryColor: #d2df43;
+  --SitePrimaryColor: #eaeaed;
+  --SiteSecondaryColor: #43a3df;
   --SiteTertiaryColor: #8d8d8e;
 }
 
@@ -144,242 +142,25 @@ html {
 }
 
 .HomePage {
-  top: 70px;
   z-index: 1;
   position: absolute;
   width: 100%;
-  height: calc(100% - 70px);
+  height: 100%;
   background-color: var(--SitePrimaryColor);
-  overflow: visible;
-
+  color: black;
   @include alignCenter;
-  flex-direction: row;
+  flex-direction: column;
 
-  .HomeLeftBox {
+  h1 {
+    font-size: 2rem;
+  }
+
+  .stripeButtons {
     position: relative;
-    width: 50%;
-    height: 100vh;
-    margin-bottom: 70px;
+    width: 40%;
+    height: 400px;
     @include alignCenter;
     flex-direction: column;
     justify-content: space-around;
-
-    .ModelBox {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-
-      #Canvas {
-        position: relative;
-        width: 100%;
-        height: 100%;
-      }
-    }
-
-    .bgContainer {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-
-      #bgWaves {
-        position: absolute;
-        width: 100vh;
-        height: auto;
-        top: 35%;
-        right: -55%;
-        // right: 18%;
-        transform: rotateZ(90deg);
-        transform: rotateZ(90deg) rotateY(180deg);
-        opacity: 0.5;
-      }
-
-      .bgStuff {
-        z-index: 0;
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-        background: linear-gradient(
-          to right,
-          var(--SiteTertiaryColor) 90%,
-          transparent 0%
-        );
-        display: grid;
-        grid-template-columns: repeat(1fr, 6);
-        grid-template-rows: repeat(1fr, 10);
-        grid-template-areas:
-          "T T T R R R"
-          "T T T R R R"
-          "T T T R R R"
-          "T T T R R R"
-          ". . . . . ."
-          ". . . . . ."
-          "B B B L L L"
-          "B B B L L L"
-          "B B B L L L"
-          "B B B L L L";
-
-        .middleCircle {
-          top: 50%;
-          left: 50%;
-          width: 450px;
-          height: 450px;
-          background-color: var(--SitePrimaryColor);
-          border-radius: 50%;
-          transform: translate(-50%, -50%);
-          position: absolute;
-        }
-
-        .tlbox,
-        .trbox,
-        .brbox,
-        .blbox {
-          position: relative;
-          grid-area: T;
-          @include alignCenter();
-          width: 100%;
-          height: 100%;
-          overflow: hidden;
-
-          > * {
-            position: relative;
-            width: 100%;
-            height: 33%;
-            overflow: visible;
-            @include alignCenter();
-            justify-content: flex-start;
-
-            #line1,
-            #line2 {
-              position: relative;
-              width: 5px;
-              height: 100%;
-              background-color: var(--SiteSecondaryColor);
-            }
-
-            #line1 {
-              right: 26px;
-              background: linear-gradient(
-                to bottom,
-                transparent,
-                var(--SiteSecondaryColor)
-              );
-            }
-
-            #line2 {
-              top: -10px;
-              transform: rotateZ(-30deg);
-            }
-
-            #bullet {
-              position: relative;
-              top: -20px;
-              width: 10px;
-              height: 10px;
-              border-radius: 50%;
-              left: 26.5px;
-              background-color: var(--SiteSecondaryColor);
-              box-shadow: 0px 0px 10px var(--SiteSecondaryColor);
-            }
-          }
-        }
-
-        .trbox,
-        .blbox {
-          grid-area: R;
-
-          > * {
-            #line1 {
-              left: 26px;
-            }
-            #line2 {
-              transform: rotateZ(30deg);
-            }
-            #bullet {
-              left: -27.5px;
-            }
-          }
-        }
-
-        .brbox {
-          grid-area: L;
-          transform: rotateZ(180deg);
-        }
-        .blbox {
-          transform: rotateZ(180deg);
-          grid-area: B;
-        }
-      }
-    }
-  }
-  .HomeRightBox {
-    position: relative;
-    width: 50%;
-    height: 100%;
-    @include alignCenter();
-    background-color: transparent;
-
-    .TitlesBox,
-    .ButtonsBox {
-      width: 90%;
-      height: 40%;
-      // border: 1px solid white;
-      @include alignCenter();
-    }
-
-    .TitlesBox {
-      align-items: flex-start;
-
-      h1,
-      h2,
-      h3 {
-        color: var(--SiteSecondaryColor);
-        margin: 10px 0px;
-        margin-left: 15%;
-      }
-      h2 {
-        font-size: 1.8rem;
-      }
-
-      h1 {
-        font-size: 4rem;
-      }
-
-      h3 {
-        padding-right: 3%;
-        color: var(--SiteTertiaryColor);
-        // text-decoration: underline 1px solid var(--SiteSecondaryColor);
-        font-size: 1.3rem;
-      }
-    }
-
-    .ButtonsBox {
-      @include alignCenter();
-      width: 70%;
-      height: 30%;
-      flex-direction: row;
-      justify-content: space-around;
-
-      button {
-        width: 170px;
-        height: 60px;
-        border-radius: 10px;
-        cursor: pointer;
-        font-size: 1rem;
-        color: var(--SiteTertiaryColor);
-        background-color: transparent;
-        border: 2px solid var(--SiteSecondaryColor);
-        -webkit-text-stroke: 1px var(--SiteTertiaryColor);
-      }
-
-      button:nth-child(2) {
-        background-color: var(--SiteSecondaryColor);
-        color: var(--SitePrimaryColor);
-        -webkit-text-stroke: 1px var(--SitePrimaryColor);
-      }
-    }
   }
 }
