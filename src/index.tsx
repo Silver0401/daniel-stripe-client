@@ -10,7 +10,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 
 const stripePromise = loadStripe(
-  "pk_test_51I2XfOBwVvvXbSw3t1tAdKjpsto1DYeBkb71GrTineG3wCf2Uf0yq54TGCJGMtKvxN5HPlCAFm0qV68zrhaKDbh800LCB6fOU7"
+  process.env.REACT_APP_NOT_STRIPE_KEY || "error"
 );
 
 ReactDOM.render(
