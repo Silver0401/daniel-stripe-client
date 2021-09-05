@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Context } from "./../data/context";
 import { Button } from "@chakra-ui/button";
 import axios from "axios";
+import { motion } from "framer-motion";
 import { useStripe } from "@stripe/react-stripe-js";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -9,28 +10,46 @@ import LogoImg from "./../assets/coso.jpeg";
 
 const Home: React.FC = () => {
   const { contextData, setContextData } = useContext(Context);
+  const [buttonLoading, setButtonLoading] = useState<boolean>(false);
   const [selectedPayment, setSelectedPayment] = useState<
     "one" | "monthly" | null
   >(null);
   const stripe = useStripe();
+
+  const MotionTransitionVariants = {
+    initPosition: {
+      opacity: 0,
+    },
+    DesiredPosition: {
+      opacity: 1,
+    },
+    ExitPosition: {
+      opacity: 0,
+    },
+  };
 
   useEffect(() => {
     setContextData({ ...contextData, currentPage: "Home" });
   }, []);
 
   const createOneTimeCheckoutSession = async () => {
+    setButtonLoading(true);
+
     const line_items = [
       {
         price_data: {
           currency: "mxn",
           product_data: {
-            name: "Cosox",
-            description: "cosos de coso",
+            name: "Reservación Glamping Monterrey",
+            description:
+              "Tipo de Habitación: Safari 1, Fecha: Nov 18 - 19, No. de Noches: 1, Húespedes: 1; Tipo de Pago: de Contado",
             images: [
-              "https://concepto.de/wp-content/uploads/2019/03/reino-animal-portada.jpg",
+              `${process.env.REACT_APP_NOT_BACKEND_URL}/GlampingImg${Math.floor(
+                Math.random() * 7 + 1
+              )}`,
             ],
           },
-          unit_amount: 2000,
+          unit_amount: 400000,
         },
         quantity: 1,
       },
@@ -48,10 +67,13 @@ const Home: React.FC = () => {
       })
       .catch((err) => {
         toast.error(`FE error: ${err}`);
+        setButtonLoading(false);
       });
   };
 
   const createMonthlyCheckoutSession = async () => {
+    setButtonLoading(true);
+
     const line_items = [
       {
         price_data: {
@@ -61,16 +83,18 @@ const Home: React.FC = () => {
             interval_count: 1,
           },
           product_data: {
-            name: "Cosox",
-            description: "cosos de coso",
+            name: "Reservación Glamping Monterrey",
+            description:
+              "Tipo de Habitación: Safari 1, Fecha: Nov 18 - 19, No. de Noches: 1, Húespedes: 1; Tipo de Pago: en 5 Plazos",
             images: [
-              "https://concepto.de/wp-content/uploads/2019/03/reino-animal-portada.jpg",
+              `${process.env.REACT_APP_NOT_BACKEND_URL}/GlampingImg${Math.floor(
+                Math.random() * 7 + 1
+              )}`,
             ],
           },
-          unit_amount: 2000,
+          unit_amount: 100000,
         },
         quantity: 1,
-        // price: "price_1JVMhtBwVvvXbSw3KQIjvVqw",
       },
     ];
 
@@ -86,6 +110,7 @@ const Home: React.FC = () => {
       })
       .catch((err) => {
         toast.error(`FE error: ${err}`);
+        setButtonLoading(false);
       });
   };
 
@@ -117,7 +142,13 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="HomePage">
+    <motion.div
+      className="HomePage"
+      variants={MotionTransitionVariants}
+      initial={"initPosition"}
+      animate={"DesiredPosition"}
+      exit={"ExitPosition"}
+    >
       <div className="PaymentSection">
         <div className="header">
           <img src={LogoImg} alt="Logo" />
@@ -140,7 +171,7 @@ const Home: React.FC = () => {
               type="checkbox"
               checked={selectedPayment === "monthly" ? true : false}
             />
-            <label>Pago de 5 Plazos</label>
+            <label>Pago en 5 Plazos</label>
             {returnSvg("monthlyPayment")}
           </li>
 
@@ -154,13 +185,14 @@ const Home: React.FC = () => {
             }}
             size="lg"
             colorScheme="linkedin"
+            isLoading={buttonLoading}
           >
             Continuar
           </Button>
         </ul>
       </div>
       <ToastContainer />
-    </div>
+    </motion.div>
   );
 };
 

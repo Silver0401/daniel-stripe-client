@@ -6,7 +6,6 @@ import { AnimatePresence } from "framer-motion";
 import HomePage from "./pages/home";
 import SuccessPage from "./pages/success";
 import CanceledPage from "./pages/canceled";
-import GlobalNav from "./components/nav";
 
 const App: React.FC = () => {
   const { contextData } = useContext(Context);
@@ -18,7 +17,6 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      {/* <GlobalNav /> */}
       <AnimatePresence exitBeforeEnter>
         <Switch location={Location} key={Location.pathname}>
           <Route key="HomePage" exact path="/" component={HomePage} />
